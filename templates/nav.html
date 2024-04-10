@@ -1,0 +1,38 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='index.css') }}"
+    />
+    <link rel="stylesheet" href="{{ url_for('static', filename='nav.css') }}" />
+  </head>
+  <body>
+    <nav class="nav-bar">
+      <ul class="nav-listing">
+        {% if not current_user.username %}
+        <li class="nav-item">
+          <a class="nav-link" href="{{url_for('register')}}">Register</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{url_for('login')}}">Login</a>
+        </li>
+        {%endif%} {% if current_user.username %}
+        <li class="nav-item">
+          <a class="nav-link" href="{{url_for('home')}}">Courses</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{url_for('catalog')}}">Catalog</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{url_for('logout')}}">Logout</a>
+        </li>
+        {%endif%}
+      </ul>
+    </nav>
+
+    {% block nav %} {% endblock %}
+  </body>
+</html>

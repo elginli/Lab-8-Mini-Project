@@ -1,0 +1,67 @@
+.content {
+  margin: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+  align-items: center;
+}
+
+.grade-table {
+  border-collapse: collapse;
+  height: auto;
+  color: white;
+  box-shadow: -5px 5px 3px #1f1f1f, 5px 5px 3px #1f1f1f, -5px -5px 3px #1f1f1f,
+    5px -5px 3px #1f1f1f;
+}
+
+tr {
+  text-align: left;
+}
+
+td,
+th {
+  border: black solid 2px;
+  padding: 8px;
+}
+
+.grade-name {
+  width: 300px;
+}
+
+.grade-name-input {
+  display: none;
+}
+
+.grade-value {
+  width: 50px;
+}
+
+.grade-grade-value {
+  padding: 0%;
+  margin: 0%;
+  height: 100%;
+}
+
+.grade-value-input {
+  padding: 0%;
+  width: 100%;
+  min-height: 34px;
+  padding: 0px 5px;
+  border-radius: 0px;
+  background-color: var(--background-col);
+  color: var(--text-col);
+}
+
+.grade-controls-button {
+  font-family: "Times New Roman", Times, serif;
+  color: white;
+  background-color: #490cff;
+  width: 75px;
+  border-radius: 20px;
+  border: 1px ridge black;
+}
+
+th {
+  background-color: #490cff;
+}

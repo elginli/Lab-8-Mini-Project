@@ -1,0 +1,63 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Courses</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='index.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='home.css') }}"
+    />
+  </head>
+  <body>
+    {%extends "nav.html"%} {% block nav %}
+    <div class="content">
+      {% for course in courses %}
+      {% if current_user.role == "Teacher"%}
+      <a class="course-card" href="/grades/{{course.name}}" >
+      {%else%}
+      <a class="course-card" href="" >
+      {% endif%}
+        <div class="card">
+          <p class="course-information">
+            <div>{{course.name}}</div>
+            <div>{%for teacher in course.teachers%} {{teacher.username}}
+              {%endfor%}</div>
+            <div>{{course.time}}</div>
+            <div>Seats Remaining: {{course.capacity}}</div>
+          </p>
+        </div>
+      </a>
+      {% endfor%} {%if current_user.role == "Teacher" %}
+      <form class="card" action="/createcourse" method="post">
+        <input
+          name="name"
+          class="add-course name"
+          type="text"
+          placeholder="Course Name"
+          required
+        />
+        <input
+          name="time"
+          class="add-course time"
+          type="text"
+          placeholder="Time"
+          required
+        />
+        <input
+          name="capacity"
+          class="add-course capacity"
+          type="text"
+          placeholder="Capacity"
+          required
+        />
+        <input class="add-course submission" type="submit" value="Add Course" />
+      </form>
+      {% endif %}
+    </div>
+    {% endblock %}
+  </body>
+</html>

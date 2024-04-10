@@ -1,0 +1,12 @@
+body {
+  background-color: #282828;
+  color: white;
+  display: grid;
+  grid-template-columns: 200px auto;
+  margin: 0px;
+  padding: 0px;
+}
+
+html {
+  width: 100%;
+}

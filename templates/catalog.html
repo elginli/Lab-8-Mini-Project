@@ -1,0 +1,63 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Catalog</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='index.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='home.css') }}"
+    />
+  </head>
+  <body>
+    {%extends "nav.html"%} {% block nav %}
+    <div class="content">
+      {% for course in enrolled %}
+      <form class="card" action="/unenroll" method="post">
+        <div>{{course.name}}</div>
+        <div>
+          {%for teacher in course.teachers%} {{teacher.username}} {%endfor%}
+        </div>
+        <div>{{course.time}}</div>
+        <div>Remaining Seats: {{course.capacity}}</div>
+        <input
+          class="add-course submission"
+          type="submit"
+          value="Remove Course"
+        />
+        <input
+          name="name"
+          class="enroll name"
+          type="text"
+          placeholder="Course Name"
+          required
+          value="{{course.name}}"
+        />
+      </form>
+      {%endfor%} {% for course in courses %} {% if not course in enrolled and
+      course.capacity != 0 %}
+      <form class="card" action="/enroll" method="post">
+        <div>{{course.name}}</div>
+        <div>
+          {%for teacher in course.teachers%} {{teacher.username}} {%endfor%}
+        </div>
+        <div>{{course.time}}</div>
+        <div>Remaining Seats: {{course.capacity}}</div>
+        <input class="add-course submission" type="submit" value="Add Course" />
+        <input
+          name="name"
+          class="enroll name"
+          type="text"
+          placeholder="Course Name"
+          required
+          value="{{course.name}}"
+        />
+      </form>
+      {% endif %} {% endfor %}
+    </div>
+    {% endblock %}
+  </body>
+</html>

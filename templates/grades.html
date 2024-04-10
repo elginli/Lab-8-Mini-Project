@@ -1,0 +1,57 @@
+<title>{{course.name}}</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}" />
+<link rel="stylesheet" href="{{ url_for('static', filename='grades.css') }}" />
+<body>
+  {%extends "nav.html"%} {% block nav %} {%if current_user.role == "Teacher"%}
+  <div class="content">
+    <table class="grade-table">
+      <tr>
+        <th class="grade-name">Student Name</th>
+        <th class="grade-value">Grade</th>
+        <th class="grade-controls">Controls</th>
+      </tr>
+      <tbody class="grade-table-values">
+        {%for student in course.students%}
+        <form>
+          <tr>
+            <td class="grade-name-value">
+              {{student.username}}
+              <input
+                name="name"
+                class="grade-name-input"
+                type="text"
+                value="{{student.username}}"
+              />
+            </td>
+            <td class="grade-grade-value">
+              <input
+                name="grade"
+                class="grade-value-input"
+                type="number"
+                value="{{student.get_grade(student.id, course.id)}}"
+              />
+            </td>
+            <td>
+              <input
+                class="grade-controls-button"
+                formaction="/grades/{{course.name}}"
+                formmethod="post"
+                type="submit"
+                value="Update"
+              />
+              <input
+                class="grade-controls-button"
+                formaction="/unenroll/{{student.username}}/{{course.name}}"
+                formmethod="post"
+                type="submit"
+                value="Remove"
+              />
+            </td>
+          </tr>
+        </form>
+        {%endfor%}
+      </tbody>
+    </table>
+  </div>
+  {%endif%} {% endblock %}
+</body>

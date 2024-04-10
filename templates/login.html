@@ -1,0 +1,44 @@
+<title>Login</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}" />
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='register.css') }}"
+/>
+<body>
+  {%extends "nav.html"%} {% block nav %}
+  <div class="content">
+    <form class="Login-box" action="/login" method="post">
+      <label class="Login-title">Login</label>
+      <div class="Login-fields">
+        <label class="Login-textfields">
+          <input
+            name="username"
+            type="text"
+            class="Login-username"
+            placeholder="Name"
+            value="{{request.form.username }}"
+          />
+          <div class="Login-required">{{username_error}}</div>
+        </label>
+        <label class="Login-textfields">
+          <input
+            name="password"
+            type="password"
+            class="Login-password"
+            placeholder="Password"
+            value="{{request.form.password }}"
+          />
+          <div class="Login-required">{{password_error}}{{error}}</div>
+        </label>
+      </div>
+      <input
+        formaction="/login"
+        formmethod="post"
+        type="submit"
+        class="Login-submission"
+        value="Login"
+      />
+    </form>
+  </div>
+  {% endblock %}
+</body>
